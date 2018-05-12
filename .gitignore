@@ -1,0 +1,16 @@
+Thumbs.db
+.DS_Store
+.atom/
+.dart_tool
+.idea
+.packages
+.pub/
+build/
+pubspec.lock
+Podfile.lock
+Pods/
+ios/.generated/
+ios/Flutter/Generated.xcconfig
+GeneratedPluginRegistrant.h
+GeneratedPluginRegistrant.m
+GeneratedPluginRegistrant.java

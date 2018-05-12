@@ -1,0 +1,15 @@
+name: example
+description: Example of Sticky Headers
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sticky_headers:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
