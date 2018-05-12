@@ -7,7 +7,37 @@ whilst the content is scrolled.
 In your pubspec.yaml
 ```
 dependencies:
-  sticky_headers: "^0.1.2"
+  sticky_headers: "^0.1.3"
+```
+
+## Usage
+
+```
+import 'package:sticky_headers/sticky_headers.dart';
+
+// ...
+class Example extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		return new ListView.builder(itemBuilder: (context, index) {
+			return new StickyHeader(
+				header: new Container(
+					height: 50.0,
+					color: Colors.blueGrey[700],
+					padding: new EdgeInsets.symmetric(horizontal: 16.0),
+					alignment: Alignment.centerLeft,
+					child: new Text('Header #$index',
+						style: const TextStyle(color: Colors.white),
+					),
+				),
+				content: new Container(
+					child: new Image.network(imageForIndex(index), fit: BoxFit.cover,
+						width: double.infinity, height: 200.0),
+				),
+			);
+		});
+	}
+}
 ```
 
 ## Examples
