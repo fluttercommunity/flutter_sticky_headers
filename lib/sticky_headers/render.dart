@@ -4,6 +4,7 @@
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
 
 import 'dart:math' show min, max;
 
@@ -14,9 +15,9 @@ typedef void RenderStickyHeaderCallback(double stuckAmount);
 
 /// RenderObject for StickyHeader widget.
 ///
-/// Monitors given [scrollable] and adjusts its layout based on its offset to
-/// the scrollables [RenderObject]. The [header] will be placed above [content]
-/// unless [overlapHeaders] is set to true. The supplied [callback] will be used
+/// Monitors given [Scrollable] and adjusts its layout based on its offset to
+/// the scrollables [RenderObject]. The header will be placed above content
+/// unless overlapHeaders is set to true. The supplied callback will be used
 /// to report the
 ///
 class RenderStickyHeader extends RenderBox

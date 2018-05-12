@@ -7,7 +7,7 @@ whilst the content is scrolled.
 In your pubspec.yaml
 ```
 dependencies:
-  sticky_headers: "^0.1.0"
+  sticky_headers: "^0.1.1"
 ```
 
 ## Examples

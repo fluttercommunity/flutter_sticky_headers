@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 import './images.dart';
