@@ -1,6 +1,6 @@
 name: sticky_headers
 description: Flutter Sticky Headers - Lets you place headers on scrollable content that will stick to the top of the container whilst the content is scrolled.
-version: 0.1.6
+version: 0.1.7
 authors:
  - Flutter Community <flutter-community@googlegroups.com>
  - Simon Lightfoot <simon@devangels.london>

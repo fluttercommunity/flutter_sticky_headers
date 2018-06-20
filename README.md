@@ -15,7 +15,7 @@ inside any scrollable content, such as:  `ListView`, `GridView`, `CustomScrollVi
 Depend on it:
 ```yaml
 dependencies:
-  sticky_headers: "^0.1.4"
+  sticky_headers: "^0.1.7"
 ```
 
 Import it:

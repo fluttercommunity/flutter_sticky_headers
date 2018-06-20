@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.7
+  * Updated Docs.
+
 ## 0.1.6
   * Added Flutter Community Logo.
 
