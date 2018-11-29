@@ -5,6 +5,7 @@ authors:
  - Flutter Community <flutter-community@googlegroups.com>
  - Simon Lightfoot <simon@devangels.london>
 homepage: https://github.com/fluttercommunity/flutter_sticky_headers
+maintainer: Simon Lightfoot (@slightfoot)
 
 environment:
   sdk: ">=2.0.0-dev.28.0 <3.0.0"
