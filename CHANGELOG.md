@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.7+1
+  * Updated authors.
+
 ## 0.1.7
   * Updated Docs.
 
