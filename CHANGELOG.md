@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.7+1
+## 0.1.7+1 - 0.1.7+2
   * Updated authors.
 
 ## 0.1.7
