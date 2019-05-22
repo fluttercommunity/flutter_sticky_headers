@@ -118,7 +118,11 @@ class _StickyHeaderBuilderState extends State<StickyHeaderBuilder> {
       callback: (double stuckAmount) {
         if (_stuckAmount != stuckAmount) {
           _stuckAmount = stuckAmount;
-          WidgetsBinding.instance.endOfFrame.then((_) => setState(() {}));
+          WidgetsBinding.instance.endOfFrame.then((_) {
+            if(mounted){
+              setState(() {});
+            }
+          });
         }
       },
     );

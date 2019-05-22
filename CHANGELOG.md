@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.8
+  * Resolved endOfFrame/dispose race condition.
+
 ## 0.1.7+1 - 0.1.7+2
   * Updated authors.
 
