@@ -2,6 +2,7 @@
 // Use of this source code is governed by a the MIT license that can be
 // found in the LICENSE file.
 
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
@@ -190,6 +191,6 @@ class RenderStickyHeader extends RenderBox
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    defaultPaint(context, offset);
+    defaultPaint(context, Offset(offset.dx, offset.dy - Theme.of(_scrollable.context).appBarTheme.elevation));
   }
 }
