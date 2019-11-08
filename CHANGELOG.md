@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.8+1
+  * Added New Flutter Community Banner.
+
 ## 0.1.8
   * Resolved endOfFrame/dispose race condition.
 

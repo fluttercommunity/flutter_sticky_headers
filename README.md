@@ -1,3 +1,4 @@
+
 [![Flutter Community: sticky_headers](https://fluttercommunity.dev/_github/header/sticky_headers)](https://github.com/fluttercommunity/community)
 
 # Flutter Sticky Headers
@@ -28,19 +29,19 @@ Use it:
 class Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(itemBuilder: (context, index) {
-      return new StickyHeader(
-        header: new Container(
+    return ListView.builder(itemBuilder: (context, index) {
+      return StickyHeader(
+        header: Container(
           height: 50.0,
           color: Colors.blueGrey[700],
-          padding: new EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           alignment: Alignment.centerLeft,
-          child: new Text('Header #$index',
+          child: Text('Header #$index',
             style: const TextStyle(color: Colors.white),
           ),
         ),
-        content: new Container(
-          child: new Image.network(imageForIndex(index), fit: BoxFit.cover,
+        content: Container(
+          child: Image.network(imageForIndex(index), fit: BoxFit.cover,
             width: double.infinity, height: 200.0),
         ),
       );
