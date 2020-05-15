@@ -28,17 +28,20 @@ class RenderStickyHeader extends RenderBox
   RenderStickyHeaderCallback _callback;
   ScrollableState _scrollable;
   bool _overlapHeaders;
+  bool _stickToVisibleContent;
 
   RenderStickyHeader({
     @required ScrollableState scrollable,
     RenderStickyHeaderCallback callback,
     bool overlapHeaders: false,
+    bool stickToVisibleContent: false,
     RenderBox header,
     RenderBox content,
   })  : assert(scrollable != null),
         _scrollable = scrollable,
         _callback = callback,
-        _overlapHeaders = overlapHeaders {
+        _overlapHeaders = overlapHeaders,
+        _stickToVisibleContent = stickToVisibleContent {
     if (content != null) add(content);
     if (header != null) add(header);
   }
@@ -70,6 +73,14 @@ class RenderStickyHeader extends RenderBox
       return;
     }
     _overlapHeaders = newValue;
+    markNeedsLayout();
+  }
+
+  set stickToVisibleContent(bool newValue) {
+    if (_stickToVisibleContent == newValue) {
+      return;
+    }
+    _stickToVisibleContent = newValue;
     markNeedsLayout();
   }
 
@@ -117,7 +128,7 @@ class RenderStickyHeader extends RenderBox
     contentParentData.offset = new Offset(0.0, _overlapHeaders ? 0.0 : headerHeight);
 
     // determine by how much the header should be stuck to the top
-    final double stuckOffset = determineStuckOffset();
+    final double stuckOffset = determineStuckOffset(height);
 
     // place header over content relative to scroll offset
     final double maxOffset = height - headerHeight;
@@ -131,11 +142,17 @@ class RenderStickyHeader extends RenderBox
     }
   }
 
-  double determineStuckOffset() {
+  double determineStuckOffset(double height) {
     final scrollBox = _scrollable.context.findRenderObject();
     if (scrollBox?.attached ?? false) {
       try {
-        return localToGlobal(Offset.zero, ancestor: scrollBox).dy;
+        double scrollOffset = localToGlobal(Offset.zero, ancestor: scrollBox).dy;
+
+        if (_stickToVisibleContent && scrollBox is RenderRepaintBoundary) {
+          scrollOffset = max(scrollOffset, scrollBox.constraints.maxHeight - height);
+        }
+
+        return scrollOffset;
       } catch (e) {
         // ignore and fall-through and return 0.0
       }

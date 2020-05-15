@@ -34,6 +34,7 @@ class StickyHeader extends MultiChildRenderObjectWidget {
     @required this.header,
     @required this.content,
     this.overlapHeaders: false,
+    this.stickToVisibleContent: false,
     this.callback,
   }) : super(
           key: key,
@@ -50,6 +51,9 @@ class StickyHeader extends MultiChildRenderObjectWidget {
   /// If true, the header will overlap the Content.
   final bool overlapHeaders;
 
+  /// If true, the header starts scrolling once the bottom of the content is visible.
+  final bool stickToVisibleContent;
+
   /// Optional callback with stickyness value. If you think you need this, then you might want to
   /// consider using [StickyHeaderBuilder] instead.
   final RenderStickyHeaderCallback callback;
@@ -62,6 +66,7 @@ class StickyHeader extends MultiChildRenderObjectWidget {
       scrollable: scrollable,
       callback: this.callback,
       overlapHeaders: this.overlapHeaders,
+      stickToVisibleContent: this.stickToVisibleContent,
     );
   }
 
@@ -70,7 +75,8 @@ class StickyHeader extends MultiChildRenderObjectWidget {
     renderObject
       ..scrollable = Scrollable.of(context)
       ..callback = this.callback
-      ..overlapHeaders = this.overlapHeaders;
+      ..overlapHeaders = this.overlapHeaders
+      ..stickToVisibleContent = this.stickToVisibleContent;
   }
 }
 
@@ -88,6 +94,7 @@ class StickyHeaderBuilder extends StatefulWidget {
     @required this.builder,
     this.content,
     this.overlapHeaders: false,
+    this.stickToVisibleContent: false,
   }) : super(key: key);
 
   /// Called when the sticky amount changes for the header.
@@ -100,6 +107,9 @@ class StickyHeaderBuilder extends StatefulWidget {
   /// If true, the header will overlap the Content.
   final bool overlapHeaders;
 
+  /// If true, the header starts scrolling once the bottom of the content is visible.
+  final bool stickToVisibleContent;
+
   @override
   _StickyHeaderBuilderState createState() => new _StickyHeaderBuilderState();
 }
@@ -111,6 +121,7 @@ class _StickyHeaderBuilderState extends State<StickyHeaderBuilder> {
   Widget build(BuildContext context) {
     return new StickyHeader(
       overlapHeaders: widget.overlapHeaders,
+      stickToVisibleContent: widget.stickToVisibleContent,
       header: new LayoutBuilder(
         builder: (context, _) => widget.builder(context, _stuckAmount ?? 0.0),
       ),
