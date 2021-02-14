@@ -34,6 +34,7 @@ class StickyHeader extends MultiChildRenderObjectWidget {
     @required this.header,
     @required this.content,
     this.overlapHeaders: false,
+    this.controller,
     this.callback,
   }) : super(
           key: key,
@@ -50,16 +51,19 @@ class StickyHeader extends MultiChildRenderObjectWidget {
   /// If true, the header will overlap the Content.
   final bool overlapHeaders;
 
+  /// Optional [ScrollController] that will be used by the widget instead of the default inherited one.
+  final ScrollController controller;
+
   /// Optional callback with stickyness value. If you think you need this, then you might want to
   /// consider using [StickyHeaderBuilder] instead.
   final RenderStickyHeaderCallback callback;
 
   @override
   RenderStickyHeader createRenderObject(BuildContext context) {
-    var scrollable = Scrollable.of(context);
-    assert(scrollable != null);
-    return new RenderStickyHeader(
-      scrollable: scrollable,
+    final scrollPosition = this.controller?.position ?? Scrollable.of(context).position;
+    assert(scrollPosition != null);
+    return RenderStickyHeader(
+      scrollPosition: scrollPosition,
       callback: this.callback,
       overlapHeaders: this.overlapHeaders,
     );
@@ -67,8 +71,10 @@ class StickyHeader extends MultiChildRenderObjectWidget {
 
   @override
   void updateRenderObject(BuildContext context, RenderStickyHeader renderObject) {
+    final scrollPosition = this.controller?.position ?? Scrollable.of(context).position;
+    assert(scrollPosition != null);
     renderObject
-      ..scrollable = Scrollable.of(context)
+      ..scrollPosition = scrollPosition
       ..callback = this.callback
       ..overlapHeaders = this.overlapHeaders;
   }
@@ -88,6 +94,7 @@ class StickyHeaderBuilder extends StatefulWidget {
     @required this.builder,
     this.content,
     this.overlapHeaders: false,
+    this.controller,
   }) : super(key: key);
 
   /// Called when the sticky amount changes for the header.
@@ -100,8 +107,11 @@ class StickyHeaderBuilder extends StatefulWidget {
   /// If true, the header will overlap the Content.
   final bool overlapHeaders;
 
+  /// Optional [ScrollController] that will be used by the widget instead of the default inherited one.
+  final ScrollController controller;
+
   @override
-  _StickyHeaderBuilderState createState() => new _StickyHeaderBuilderState();
+  _StickyHeaderBuilderState createState() => _StickyHeaderBuilderState();
 }
 
 class _StickyHeaderBuilderState extends State<StickyHeaderBuilder> {
@@ -109,12 +119,13 @@ class _StickyHeaderBuilderState extends State<StickyHeaderBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return new StickyHeader(
+    return StickyHeader(
       overlapHeaders: widget.overlapHeaders,
-      header: new LayoutBuilder(
+      header: LayoutBuilder(
         builder: (context, _) => widget.builder(context, _stuckAmount ?? 0.0),
       ),
       content: widget.content,
+      controller: widget.controller,
       callback: (double stuckAmount) {
         if (_stuckAmount != stuckAmount) {
           _stuckAmount = stuckAmount;
