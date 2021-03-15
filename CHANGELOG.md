@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.0
+  * Add Null Safety
+
 ## 0.1.8+1
   * Added New Flutter Community Banner.
 
