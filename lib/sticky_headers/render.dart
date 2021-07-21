@@ -187,6 +187,6 @@ class RenderStickyHeader extends RenderBox
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    defaultPaint(context, Offset(offset.dx, offset.dy);
+    defaultPaint(context, Offset(offset.dx, offset.dy));
   }
 }
