@@ -187,6 +187,6 @@ class RenderStickyHeader extends RenderBox
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    defaultPaint(context, Offset(offset.dx, offset.dy - Theme.of(_scrollPosition.context.storageContext).appBarTheme.elevation));
+    defaultPaint(context, Offset(offset.dx, offset.dy - Theme.of(_scrollPosition.context.storageContext).appBarTheme.elevation ?? 0));
   }
 }
