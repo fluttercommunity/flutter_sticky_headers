@@ -48,7 +48,11 @@ class RenderStickyHeader extends RenderBox
     _scrollPosition = newValue;
     markNeedsLayout();
     if (attached) {
-      oldValue.removeListener(markNeedsLayout);
+      try {
+        oldValue.removeListener(markNeedsLayout);
+      } catch (ex) {
+        // nothing, oldValue could be already disposed, but it is safe to continue.
+      }
       newValue.addListener(markNeedsLayout);
     }
   }
@@ -101,8 +105,7 @@ class RenderStickyHeader extends RenderBox
 
     // determine size of ourselves based on content widget
     final width = max(constraints.minWidth, _contentBox.size.width);
-    final height =
-        max(constraints.minHeight, _overlapHeaders ? contentHeight : headerHeight + contentHeight);
+    final height = max(constraints.minHeight, _overlapHeaders ? contentHeight : headerHeight + contentHeight);
     size = Size(width, height);
     assert(size.width == constraints.constrainWidth(width));
     assert(size.height == constraints.constrainHeight(height));
