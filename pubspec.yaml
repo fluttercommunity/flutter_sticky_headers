@@ -5,7 +5,8 @@ homepage: https://github.com/fluttercommunity/flutter_sticky_headers
 maintainer: Simon Lightfoot (@slightfoot)
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.17.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
