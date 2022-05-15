@@ -16,7 +16,7 @@ inside any scrollable content, such as:  `ListView`, `GridView`, `CustomScrollVi
 Depend on it:
 ```yaml
 dependencies:
-  sticky_headers: "^0.1.8"
+  sticky_headers: "^0.3.0"
 ```
 
 Import it:
@@ -41,8 +41,12 @@ class Example extends StatelessWidget {
           ),
         ),
         content: Container(
-          child: Image.network(imageForIndex(index), fit: BoxFit.cover,
-            width: double.infinity, height: 200.0),
+          child: Image.network(
+            imageForIndex(index), 
+            fit: BoxFit.cover,
+            width: double.infinity, 
+            height: 200.0,
+          ),
         ),
       );
     });

@@ -1,4 +1,7 @@
 # Changelog
+## 0.3.0+1
+  * Update README.md
+
 ## 0.3.0
   * Updated to Flutter v3.0.0
   * Fixed pixel rounding issue for non-integer divisible devicePixelRatios.
