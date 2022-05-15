@@ -3,9 +3,12 @@ import 'package:sticky_headers/sticky_headers.dart';
 
 import './images.dart';
 
-void main() => runApp(ExampleApp());
+void main() => runApp(const ExampleApp());
 
+@immutable
 class ExampleApp extends StatelessWidget {
+  const ExampleApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,12 +16,15 @@ class ExampleApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }
 
+@immutable
 class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldWrapper(
@@ -29,19 +35,19 @@ class MainScreen extends StatelessWidget {
           tiles: <Widget>[
             ListTile(
               title: const Text('Example 1 - Headers and Content'),
-              onTap: () => navigateTo(context, (context) => Example1()),
+              onTap: () => navigateTo(context, (context) => const Example1()),
             ),
             ListTile(
               title: const Text('Example 2 - Animated Headers with Content'),
-              onTap: () => navigateTo(context, (context) => Example2()),
+              onTap: () => navigateTo(context, (context) => const Example2()),
             ),
             ListTile(
               title: const Text('Example 3 - Headers overlapping the Content'),
-              onTap: () => navigateTo(context, (context) => Example3()),
+              onTap: () => navigateTo(context, (context) => const Example3()),
             ),
             ListTile(
               title: const Text('Example 4 - Example using scroll controller'),
-              onTap: () => navigateTo(context, (context) => Example4()),
+              onTap: () => navigateTo(context, (context) => const Example4()),
             ),
           ],
         ).toList(growable: false),
@@ -54,6 +60,7 @@ class MainScreen extends StatelessWidget {
   }
 }
 
+@immutable
 class Example1 extends StatelessWidget {
   const Example1({
     Key? key,
@@ -76,7 +83,7 @@ class Example1 extends StatelessWidget {
             header: Container(
               height: 50.0,
               color: Colors.blueGrey[700],
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               alignment: Alignment.centerLeft,
               child: Text(
                 'Header #$index',
@@ -103,6 +110,7 @@ class Example1 extends StatelessWidget {
   }
 }
 
+@immutable
 class Example2 extends StatelessWidget {
   const Example2({
     Key? key,
@@ -127,7 +135,7 @@ class Example2 extends StatelessWidget {
               return Container(
                 height: 50.0,
                 color: Color.lerp(Colors.blue[700], Colors.red[700], stuckAmount),
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 alignment: Alignment.centerLeft,
                 child: Row(
                   children: <Widget>[
@@ -142,7 +150,7 @@ class Example2 extends StatelessWidget {
                       child: Opacity(
                         opacity: stuckAmount,
                         child: IconButton(
-                          icon: Icon(Icons.favorite, color: Colors.white),
+                          icon: const Icon(Icons.favorite, color: Colors.white),
                           onPressed: () => ScaffoldMessenger.of(context)
                               .showSnackBar(SnackBar(content: Text('Favorite #$index'))),
                         ),
@@ -172,6 +180,7 @@ class Example2 extends StatelessWidget {
   }
 }
 
+@immutable
 class Example3 extends StatelessWidget {
   const Example3({
     Key? key,
@@ -197,7 +206,7 @@ class Example3 extends StatelessWidget {
               return Container(
                 height: 50.0,
                 color: Colors.grey.shade900.withOpacity(0.6 + stuckAmount * 0.4),
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Header #$index',
@@ -225,6 +234,7 @@ class Example3 extends StatelessWidget {
   }
 }
 
+@immutable
 class ScaffoldWrapper extends StatelessWidget {
   const ScaffoldWrapper({
     Key? key,
@@ -242,7 +252,7 @@ class ScaffoldWrapper extends StatelessWidget {
     if (wrap) {
       return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
+          preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Hero(
             tag: 'app_bar',
             child: AppBar(
@@ -261,9 +271,12 @@ class ScaffoldWrapper extends StatelessWidget {
   }
 }
 
+@immutable
 class Example4 extends StatefulWidget {
+  const Example4({Key? key}) : super(key: key);
+
   @override
-  _Example4State createState() => _Example4State();
+  State<Example4> createState() => _Example4State();
 }
 
 class _Example4State extends State<Example4> {
@@ -282,7 +295,7 @@ class _Example4State extends State<Example4> {
                 title: const Text('Example 4'),
                 pinned: true,
                 forceElevated: innerBoxIsScrolled,
-                bottom: TabBar(
+                bottom: const TabBar(
                   tabs: <Tab>[
                     Tab(text: 'Example 1'),
                     Tab(text: 'Example 2'),

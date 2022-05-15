@@ -18,7 +18,7 @@ import './render.dart';
 ///  -1.0 >= value >= 0.0: past stuck
 /// ```
 ///
-typedef Widget StickyHeaderWidgetBuilder(BuildContext context, double stuckAmount);
+typedef StickyHeaderWidgetBuilder = Widget Function(BuildContext context, double stuckAmount);
 
 /// Stick Header Widget
 ///
@@ -33,7 +33,7 @@ class StickyHeader extends MultiChildRenderObjectWidget {
     Key? key,
     required this.header,
     required this.content,
-    this.overlapHeaders: false,
+    this.overlapHeaders = false,
     this.controller,
     this.callback,
   }) : super(
@@ -60,21 +60,21 @@ class StickyHeader extends MultiChildRenderObjectWidget {
 
   @override
   RenderStickyHeader createRenderObject(BuildContext context) {
-    final scrollPosition = this.controller?.position ?? Scrollable.of(context)!.position;
+    final scrollPosition = controller?.position ?? Scrollable.of(context)!.position;
     return RenderStickyHeader(
       scrollPosition: scrollPosition,
-      callback: this.callback,
-      overlapHeaders: this.overlapHeaders,
+      callback: callback,
+      overlapHeaders: overlapHeaders,
     );
   }
 
   @override
   void updateRenderObject(BuildContext context, RenderStickyHeader renderObject) {
-    final scrollPosition = this.controller?.position ?? Scrollable.of(context)!.position;
+    final scrollPosition = controller?.position ?? Scrollable.of(context)!.position;
     renderObject
       ..scrollPosition = scrollPosition
-      ..callback = this.callback
-      ..overlapHeaders = this.overlapHeaders;
+      ..callback = callback
+      ..overlapHeaders = overlapHeaders;
   }
 }
 
@@ -91,7 +91,7 @@ class StickyHeaderBuilder extends StatefulWidget {
     Key? key,
     required this.builder,
     required this.content,
-    this.overlapHeaders: false,
+    this.overlapHeaders = false,
     this.controller,
   }) : super(key: key);
 
@@ -109,7 +109,7 @@ class StickyHeaderBuilder extends StatefulWidget {
   final ScrollController? controller;
 
   @override
-  _StickyHeaderBuilderState createState() => _StickyHeaderBuilderState();
+  State<StickyHeaderBuilder> createState() => _StickyHeaderBuilderState();
 }
 
 class _StickyHeaderBuilderState extends State<StickyHeaderBuilder> {

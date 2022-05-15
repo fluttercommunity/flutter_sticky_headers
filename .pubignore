@@ -1,0 +1,3 @@
+*.iml
+example/android/**
+example/ios/**
