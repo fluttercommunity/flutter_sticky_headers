@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:math' show min, max;
+import 'dart:ui' as ui show window;
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -86,6 +87,12 @@ class RenderStickyHeader extends RenderBox
 
   RenderBox get _contentBox => firstChild!;
 
+  double get devicePixelRatio => ui.window.devicePixelRatio;
+
+  double roundToNearestPixel(double offset) {
+    return (offset * devicePixelRatio).roundToDouble() / devicePixelRatio;
+  }
+
   @override
   void performLayout() {
     // layout both header and content widget
@@ -93,8 +100,8 @@ class RenderStickyHeader extends RenderBox
     _headerBox.layout(childConstraints, parentUsesSize: true);
     _contentBox.layout(childConstraints, parentUsesSize: true);
 
-    final headerHeight = _headerBox.size.height;
-    final contentHeight = _contentBox.size.height;
+    final headerHeight = roundToNearestPixel(_headerBox.size.height);
+    final contentHeight = roundToNearestPixel(_contentBox.size.height);
 
     // determine size of ourselves based on content widget
     final width = constraints.constrainWidth(
@@ -110,7 +117,7 @@ class RenderStickyHeader extends RenderBox
     contentParentData.offset = Offset(0.0, _overlapHeaders ? 0.0 : headerHeight);
 
     // determine by how much the header should be stuck to the top
-    final double stuckOffset = determineStuckOffset();
+    final double stuckOffset = roundToNearestPixel(determineStuckOffset());
 
     // place header over content relative to scroll offset
     final double maxOffset = height - headerHeight;
