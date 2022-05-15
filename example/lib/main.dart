@@ -71,23 +71,25 @@ class Example1 extends StatelessWidget {
         primary: controller == null,
         controller: controller,
         itemBuilder: (context, index) {
-          return Material(
-            color: Colors.grey[300],
-            child: StickyHeader(
-              controller: controller, // Optional
-              header: Container(
-                height: 50.0,
-                color: Colors.blueGrey[700],
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Header #$index',
-                  style: const TextStyle(color: Colors.white),
-                ),
+          return StickyHeader(
+            controller: controller, // Optional
+            header: Container(
+              height: 50.0,
+              color: Colors.blueGrey[700],
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Header #$index',
+                style: const TextStyle(color: Colors.white),
               ),
-              content: Container(
-                child: Image.network(imageForIndex(index),
-                    fit: BoxFit.cover, width: double.infinity, height: 200.0),
+            ),
+            content: Container(
+              color: Colors.grey[300],
+              child: Image.network(
+                imageForIndex(index),
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 200.0,
               ),
             ),
           );
@@ -118,43 +120,45 @@ class Example2 extends StatelessWidget {
         primary: controller == null,
         controller: controller,
         itemBuilder: (context, index) {
-          return Material(
-            color: Colors.grey[300],
-            child: StickyHeaderBuilder(
-              controller: controller, // Optional
-              builder: (BuildContext context, double stuckAmount) {
-                stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
-                return Container(
-                  height: 50.0,
-                  color: Color.lerp(Colors.blue[700], Colors.red[700], stuckAmount),
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'Header #$index',
-                          style: const TextStyle(color: Colors.white),
+          return StickyHeaderBuilder(
+            controller: controller, // Optional
+            builder: (BuildContext context, double stuckAmount) {
+              stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+              return Container(
+                height: 50.0,
+                color: Color.lerp(Colors.blue[700], Colors.red[700], stuckAmount),
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Header #$index',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    Offstage(
+                      offstage: stuckAmount <= 0.0,
+                      child: Opacity(
+                        opacity: stuckAmount,
+                        child: IconButton(
+                          icon: Icon(Icons.favorite, color: Colors.white),
+                          onPressed: () => ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text('Favorite #$index'))),
                         ),
                       ),
-                      Offstage(
-                        offstage: stuckAmount <= 0.0,
-                        child: Opacity(
-                          opacity: stuckAmount,
-                          child: IconButton(
-                            icon: Icon(Icons.favorite, color: Colors.white),
-                            onPressed: () => ScaffoldMessenger.of(context)
-                                .showSnackBar(SnackBar(content: Text('Favorite #$index'))),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              content: Container(
-                child: Image.network(imageForIndex(index),
-                    fit: BoxFit.cover, width: double.infinity, height: 200.0),
+                    ),
+                  ],
+                ),
+              );
+            },
+            content: Container(
+              color: Colors.grey[300],
+              child: Image.network(
+                imageForIndex(index),
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 200.0,
               ),
             ),
           );
@@ -185,31 +189,29 @@ class Example3 extends StatelessWidget {
         primary: controller == null,
         controller: controller,
         itemBuilder: (context, index) {
-          return Material(
-            color: Colors.grey[300],
-            child: StickyHeaderBuilder(
-              overlapHeaders: true,
-              controller: controller, // Optional
-              builder: (BuildContext context, double stuckAmount) {
-                stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
-                return Container(
-                  height: 50.0,
-                  color: Colors.grey.shade900.withOpacity(0.6 + stuckAmount * 0.4),
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Header #$index',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                );
-              },
-              content: Container(
-                child: Image.network(
-                  imageForIndex(index),
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 200.0,
+          return StickyHeaderBuilder(
+            overlapHeaders: true,
+            controller: controller, // Optional
+            builder: (BuildContext context, double stuckAmount) {
+              stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+              return Container(
+                height: 50.0,
+                color: Colors.grey.shade900.withOpacity(0.6 + stuckAmount * 0.4),
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Header #$index',
+                  style: const TextStyle(color: Colors.white),
                 ),
+              );
+            },
+            content: Container(
+              color: Colors.grey[300],
+              child: Image.network(
+                imageForIndex(index),
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 200.0,
               ),
             ),
           );
