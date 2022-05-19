@@ -89,8 +89,8 @@ class RenderStickyHeader extends RenderBox
 
   double get devicePixelRatio => ui.window.devicePixelRatio;
 
-  double roundToNearestPixel(double offset) {
-    return (offset * devicePixelRatio).roundToDouble() / devicePixelRatio;
+  double ceilToNearestPixel(double offset) {
+    return (offset * devicePixelRatio).ceilToDouble() / devicePixelRatio;
   }
 
   @override
@@ -100,8 +100,8 @@ class RenderStickyHeader extends RenderBox
     _headerBox.layout(childConstraints, parentUsesSize: true);
     _contentBox.layout(childConstraints, parentUsesSize: true);
 
-    final headerHeight = roundToNearestPixel(_headerBox.size.height);
-    final contentHeight = roundToNearestPixel(_contentBox.size.height);
+    final headerHeight = ceilToNearestPixel(_headerBox.size.height);
+    final contentHeight = ceilToNearestPixel(_contentBox.size.height);
 
     // determine size of ourselves based on content widget
     final width = constraints.constrainWidth(
@@ -117,7 +117,7 @@ class RenderStickyHeader extends RenderBox
     contentParentData.offset = Offset(0.0, _overlapHeaders ? 0.0 : headerHeight);
 
     // determine by how much the header should be stuck to the top
-    final double stuckOffset = roundToNearestPixel(determineStuckOffset());
+    final double stuckOffset = ceilToNearestPixel(determineStuckOffset());
 
     // place header over content relative to scroll offset
     final double maxOffset = height - headerHeight;
