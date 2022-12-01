@@ -70,10 +70,14 @@ class StickyHeader extends MultiChildRenderObjectWidget {
 
   @override
   void updateRenderObject(BuildContext context, RenderStickyHeader renderObject) {
+    // If we find a parent StickyHeader we look for its size to provide an offset
+    // to current StickyHeader
+    final parent = context.findAncestorRenderObjectOfType<RenderStickyHeader>();
     final scrollPosition = controller?.position ?? Scrollable.of(context)!.position;
     renderObject
       ..scrollPosition = scrollPosition
       ..callback = callback
+      ..offset = parent?.lastChild?.size.height ?? 0
       ..overlapHeaders = overlapHeaders;
   }
 }
