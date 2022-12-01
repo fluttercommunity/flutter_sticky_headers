@@ -27,6 +27,7 @@ class RenderStickyHeader extends RenderBox
   RenderStickyHeaderCallback? _callback;
   ScrollPosition _scrollPosition;
   bool _overlapHeaders;
+  double _offset;
 
   RenderStickyHeader({
     required ScrollPosition scrollPosition,
@@ -34,8 +35,10 @@ class RenderStickyHeader extends RenderBox
     bool overlapHeaders = false,
     RenderBox? header,
     RenderBox? content,
+    double? offset,
   })  : _scrollPosition = scrollPosition,
         _callback = callback,
+        _offset = offset ?? 0,
         _overlapHeaders = overlapHeaders {
     if (content != null) add(content);
     if (header != null) add(header);
@@ -59,6 +62,14 @@ class RenderStickyHeader extends RenderBox
       return;
     }
     _callback = newValue;
+    markNeedsLayout();
+  }
+
+  set offset(double newValue) {
+    if (_offset == newValue) {
+      return;
+    }
+    _offset = newValue;
     markNeedsLayout();
   }
 
@@ -135,7 +146,7 @@ class RenderStickyHeader extends RenderBox
     final scrollBox = _scrollPosition.context.notificationContext!.findRenderObject();
     if (scrollBox?.attached ?? false) {
       try {
-        return localToGlobal(Offset.zero, ancestor: scrollBox).dy;
+        return localToGlobal(Offset.zero, ancestor: scrollBox).dy - _offset;
       } catch (e) {
         // ignore and fall-through and return 0.0
       }
