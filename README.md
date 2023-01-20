@@ -67,6 +67,6 @@ class Example extends StatelessWidget {
 ![Demo 3](https://github.com/slightfoot/flutter_sticky_headers/raw/gh-pages/demo3.gif)
 
 ## Bugs/Requests
-If you encounter any problems feel free to open an issue. If you feel the library is
-missing a feature, please raise a ticket on Github and I'll look into it.
-Pull request are also welcome.
+If you encounter any problems feel free to open an [issue](https://github.com/fluttercommunity/flutter_sticky_headers/issues). If you feel the library is
+missing a feature, please raise a ticket on Github and we'll look into it.
+[Pull requests](https://github.com/fluttercommunity/flutter_sticky_headers/pulls) are also welcome.
