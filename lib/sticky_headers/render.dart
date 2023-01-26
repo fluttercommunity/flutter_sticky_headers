@@ -49,10 +49,10 @@ class RenderStickyHeader extends RenderBox
     }
     final ScrollPosition oldValue = _scrollPosition;
     _scrollPosition = newValue;
-    markNeedsLayout();
+    markNeedsPaint();
     if (attached) {
-      oldValue.removeListener(markNeedsLayout);
-      newValue.addListener(markNeedsLayout);
+      oldValue.removeListener(markNeedsPaint);
+      newValue.addListener(markNeedsPaint);
     }
   }
 
@@ -61,7 +61,7 @@ class RenderStickyHeader extends RenderBox
       return;
     }
     _callback = newValue;
-    markNeedsLayout();
+    markNeedsPaint();
   }
 
   set overlapHeaders(bool newValue) {
@@ -75,12 +75,12 @@ class RenderStickyHeader extends RenderBox
   @override
   void attach(PipelineOwner owner) {
     super.attach(owner);
-    _scrollPosition.addListener(markNeedsLayout);
+    _scrollPosition.addListener(markNeedsPaint);
   }
 
   @override
   void detach() {
-    _scrollPosition.removeListener(markNeedsLayout);
+    _scrollPosition.removeListener(markNeedsPaint);
     super.detach();
   }
 
