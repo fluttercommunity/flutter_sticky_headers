@@ -107,9 +107,11 @@ class RenderStickyHeader extends RenderBox
     final width = constraints.constrainWidth(
       max(constraints.minWidth, _contentBox.size.width),
     );
-    final height = constraints.constrainHeight(
-      max(constraints.minHeight, _overlapHeaders ? contentHeight : headerHeight + contentHeight),
-    );
+    final height = constraints.constrainHeight([
+      constraints.minHeight,
+      headerHeight,
+      _overlapHeaders ? contentHeight : headerHeight + contentHeight
+    ].reduce(max));
     size = Size(width, height);
 
     // place content underneath header
