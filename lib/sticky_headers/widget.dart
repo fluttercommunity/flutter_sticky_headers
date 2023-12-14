@@ -33,6 +33,7 @@ class StickyHeader extends MultiChildRenderObjectWidget {
     Key? key,
     required this.header,
     required this.content,
+    this.headerSpacing = 0.0,
     this.overlapHeaders = false,
     this.controller,
     this.callback,
@@ -48,6 +49,9 @@ class StickyHeader extends MultiChildRenderObjectWidget {
   /// Content to be shown below the header.
   final Widget content;
 
+  /// Spacing between sticky header and start position.
+  final double headerSpacing;
+
   /// If true, the header will overlap the Content.
   final bool overlapHeaders;
 
@@ -60,21 +64,23 @@ class StickyHeader extends MultiChildRenderObjectWidget {
 
   @override
   RenderStickyHeader createRenderObject(BuildContext context) {
-    final scrollPosition = controller?.position ?? Scrollable.of(context)!.position;
+    final scrollPosition = controller?.position ?? Scrollable.of(context).position;
     return RenderStickyHeader(
       scrollPosition: scrollPosition,
       callback: callback,
       overlapHeaders: overlapHeaders,
+      headerSpacing: headerSpacing,
     );
   }
 
   @override
   void updateRenderObject(BuildContext context, RenderStickyHeader renderObject) {
-    final scrollPosition = controller?.position ?? Scrollable.of(context)!.position;
+    final scrollPosition = controller?.position ?? Scrollable.of(context).position;
     renderObject
       ..scrollPosition = scrollPosition
       ..callback = callback
-      ..overlapHeaders = overlapHeaders;
+      ..overlapHeaders = overlapHeaders
+      ..headerSpacing = headerSpacing;
   }
 }
 
@@ -91,6 +97,7 @@ class StickyHeaderBuilder extends StatefulWidget {
     Key? key,
     required this.builder,
     required this.content,
+    this.headerSpacing = 0.0,
     this.overlapHeaders = false,
     this.controller,
   }) : super(key: key);
@@ -101,6 +108,9 @@ class StickyHeaderBuilder extends StatefulWidget {
 
   /// Content to be shown below the header.
   final Widget content;
+
+  /// Spacing between sticky header and start position.
+  final double headerSpacing;
 
   /// If true, the header will overlap the Content.
   final bool overlapHeaders;
@@ -119,6 +129,7 @@ class _StickyHeaderBuilderState extends State<StickyHeaderBuilder> {
   Widget build(BuildContext context) {
     return StickyHeader(
       overlapHeaders: widget.overlapHeaders,
+      headerSpacing: widget.headerSpacing,
       header: LayoutBuilder(
         builder: (context, _) => widget.builder(context, _stuckAmount ?? 0.0),
       ),
