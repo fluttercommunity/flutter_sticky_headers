@@ -30,14 +30,13 @@ typedef StickyHeaderWidgetBuilder = Widget Function(BuildContext context, double
 class StickyHeader extends MultiChildRenderObjectWidget {
   /// Constructs a new [StickyHeader] widget.
   StickyHeader({
-    Key? key,
+    super.key,
     required this.header,
     required this.content,
     this.overlapHeaders = false,
     this.controller,
     this.callback,
   }) : super(
-          key: key,
           // Note: The order of the children must be preserved for the RenderObject.
           children: [content, header],
         );
@@ -60,7 +59,7 @@ class StickyHeader extends MultiChildRenderObjectWidget {
 
   @override
   RenderStickyHeader createRenderObject(BuildContext context) {
-    final scrollPosition = controller?.position ?? Scrollable.of(context)!.position;
+    final scrollPosition = controller?.position ?? Scrollable.of(context).position;
     return RenderStickyHeader(
       scrollPosition: scrollPosition,
       callback: callback,
@@ -70,7 +69,7 @@ class StickyHeader extends MultiChildRenderObjectWidget {
 
   @override
   void updateRenderObject(BuildContext context, RenderStickyHeader renderObject) {
-    final scrollPosition = controller?.position ?? Scrollable.of(context)!.position;
+    final scrollPosition = controller?.position ?? Scrollable.of(context).position;
     renderObject
       ..scrollPosition = scrollPosition
       ..callback = callback
@@ -88,12 +87,12 @@ class StickyHeader extends MultiChildRenderObjectWidget {
 class StickyHeaderBuilder extends StatefulWidget {
   /// Constructs a new [StickyHeaderBuilder] widget.
   const StickyHeaderBuilder({
-    Key? key,
+    super.key,
     required this.builder,
     required this.content,
     this.overlapHeaders = false,
     this.controller,
-  }) : super(key: key);
+  });
 
   /// Called when the sticky amount changes for the header.
   /// This builder must not return null.
