@@ -18,7 +18,7 @@ import './render.dart';
 ///  -1.0 >= value >= 0.0: past stuck
 /// ```
 ///
-typedef StickyHeaderWidgetBuilder = Widget Function(BuildContext context, double stuckAmount);
+typedef StickyHeaderWidgetBuilder = Widget Function(BuildContext context, double? stuckAmount);
 
 /// Stick Header Widget
 ///
@@ -131,11 +131,11 @@ class _StickyHeaderBuilderState extends State<StickyHeaderBuilder> {
       overlapHeaders: widget.overlapHeaders,
       headerSpacing: widget.headerSpacing,
       header: LayoutBuilder(
-        builder: (context, _) => widget.builder(context, _stuckAmount ?? 0.0),
+        builder: (context, _) => widget.builder(context, _stuckAmount),
       ),
       content: widget.content,
       controller: widget.controller,
-      callback: (double stuckAmount) {
+      callback: (double? stuckAmount) {
         if (_stuckAmount != stuckAmount) {
           _stuckAmount = stuckAmount;
           WidgetsBinding.instance.endOfFrame.then((_) {

@@ -130,8 +130,8 @@ class Example2 extends StatelessWidget {
         itemBuilder: (context, index) {
           return StickyHeaderBuilder(
             controller: controller, // Optional
-            builder: (BuildContext context, double stuckAmount) {
-              stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+            builder: (BuildContext context, double? stuckAmount) {
+              stuckAmount = 1.0 - (stuckAmount ?? 0.0).clamp(0.0, 1.0);
               return Container(
                 height: 50.0,
                 color: Color.lerp(Colors.blue[700], Colors.red[700], stuckAmount),
@@ -201,8 +201,8 @@ class Example3 extends StatelessWidget {
           return StickyHeaderBuilder(
             overlapHeaders: true,
             controller: controller, // Optional
-            builder: (BuildContext context, double stuckAmount) {
-              stuckAmount = 1.0 - stuckAmount.clamp(0.0, 1.0);
+            builder: (BuildContext context, double? stuckAmount) {
+              stuckAmount = 1.0 - (stuckAmount ?? 0.0).clamp(0.0, 1.0);
               return Container(
                 height: 50.0,
                 color: Colors.grey.shade900.withOpacity(0.6 + stuckAmount * 0.4),

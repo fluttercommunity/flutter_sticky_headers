@@ -11,7 +11,7 @@ import 'package:flutter/widgets.dart';
 /// Called every layout to provide the amount of stickyness a header is in.
 /// This lets the widgets animate their content and provide feedback.
 ///
-typedef RenderStickyHeaderCallback = void Function(double stuckAmount);
+typedef RenderStickyHeaderCallback = void Function(double? stuckAmount);
 
 /// RenderObject for StickyHeader widget.
 ///
