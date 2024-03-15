@@ -136,7 +136,7 @@ class RenderStickyHeader extends RenderBox
     headerParentData.offset = Offset(0.0, max(0.0, min(-stuckOffset, maxOffset)));
 
     // report to widget how much the header is stuck.
-    if (_callback != null) {
+    if (_callback != null && stuckOffset != 0) {
       final stuckAmount = max(min(headerHeight, stuckOffset), -headerHeight) / headerHeight;
       _callback!(stuckAmount);
     }
